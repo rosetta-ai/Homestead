@@ -6,6 +6,7 @@ end_of_line = lf
 insert_final_newline = true
 indent_style = space
 indent_size = 4
+spaces_around_operators = true
 trim_trailing_whitespace = true
 
 [*.md]
@@ -14,3 +15,24 @@ trim_trailing_whitespace = false
 [*.yml]
 indent_style = space
 indent_size = 2
+
+# 4-spaced files
+[**.{py,php,xml,yml,md}]
+indent_size = 4
+
+# 2-spaced files
+[**.{sh,js,json,vue,css,scss,less,sass,html,htm,xhtml,blade.php}]
+indent_size = 2
+
+[.eslintrc]
+indent_style = space
+indent_size = 2
+
+[{node_modules,vendor,bower_components}/**]
+indent_style = ignore
+indent_size = ignore
+end_of_line = ignore
+charset = ignore
+trim_trailing_whitespace = ignore
+insert_final_newline = ignore
+spaces_around_operators = ignore

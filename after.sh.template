@@ -1,0 +1,122 @@
+#!/bin/sh
+
+# If you would like to do some extra provisioning you may
+# add any commands you wish to this file and they will
+# be run after the Homestead machine is provisioned.
+
+# Git-flow
+
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes update
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install git-flow
+
+
+# Composer global setting
+
+composer global config sort-packages true
+composer global require hirak/prestissimo
+
+
+# Supervisor
+
+# sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install supervisor
+
+
+# PHP extensions
+
+# sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install php-amqp php-imagick php-uuid php-xdebug php-zmq
+# sudo ln -sf /etc/php/7.2/mods-available/xdebug.ini /etc/php/7.2/cli/conf.d/20-xdebug.ini
+
+
+# Gearman
+
+# if [ -f /etc/default/gearman-job-server ]
+# then
+#     echo "Gearman already installed."
+# else
+#     sudo apt-get update
+#     sudo apt-get -y install gearman
+
+#     sudo apt-get -y install php-gearman
+
+#     sudo rm /etc/default/gearman-job-server
+#     sudo sh -c "echo '# This is a configuration file for /etc/init.d/gearman-job-server; it allows
+# # you to perform common modifications to the behavior of the gearman-job-server
+# # daemon startup without editing the init script (and thus getting prompted by
+# # dpkg on upgrades).  We all love dpkg prompts.
+
+# # Examples ( from http://gearman.org/manual/job_server )
+# #
+# # Use drizzle as persistent queue store
+# # PARAMS=\"-q libdrizzle --libdrizzle-db=some_db --libdrizzle-table=gearman_queue\"
+# #
+# # Use mysql as persistent queue store
+# # PARAMS=\"-q libdrizzle --libdrizzle-host=10.0.0.1 --libdrizzle-user=gearman \\
+# #                       --libdrizzle-password=secret --libdrizzle-db=some_db \\
+# #                       --libdrizzle-table=gearman_queue --libdrizzle-mysql\"
+# #
+# # Missing examples for memcache persitent queue store...
+
+# # Parameters to pass to gearmand.
+# #PARAMS=\"--listen=localhost \\
+# # --daemon \\
+# # --log-file=/var/log/gearman-job-server/gearmand.log\"
+# PARAMS=\"-q mysql --mysql-host 127.0.0.1 \\
+#                  --mysql-user homestead \\
+#                  --mysql-password secret \\
+#                  --mysql-db rosetta-gearman \\
+#                  --mysql-table gearman_queue \\
+#                  --log-file=/var/log/gearman-job-server/gearmand.log \\
+#                  --daemon\"' >> /etc/default/gearman-job-server"
+
+#     sudo systemctl enable gearman-job-server.service
+#     sudo service gearman-job-server start
+# fi
+
+
+# Kibana
+
+# if [ -f /etc/kibana/kibana.yml ]
+# then
+#     echo "Kibana already installed."
+# else
+#     sudo apt-get update
+#     sudo apt-get -y install kibana
+
+#     # Start Kibana on boot
+#     sudo update-rc.d kibana defaults 95 10
+
+#     # Setup Elasticsearch & Kibana
+#     sudo sed -i "s/#network.host: 192.168.0.1/network.host: 0.0.0.0/" /etc/elasticsearch/elasticsearch.yml
+#     sudo sed -i "s/#http.port: 9200/http.port: 9200/" /etc/elasticsearch/elasticsearch.yml
+
+#     sudo sed -i "s/#server.port: 5601/server.port: 5601/" /etc/kibana/kibana.yml
+#     sudo sed -i 's/#server.host: "localhost"/server.host: "0.0.0.0"/' /etc/kibana/kibana.yml
+#     sudo sed -i 's/#elasticsearch.url: "http://localhost:9200"/elasticsearch.url: "http://localhost:9200"/' /etc/kibana/kibana.yml
+
+#     # Enable Start Kibana
+#     sudo systemctl enable kibana.service
+#     sudo service kibana start
+# fi
+
+
+# Cassandra
+
+# if [ -f /etc/cassandra/cassandra.yaml ]
+# then
+#     echo "Cassandra already installed."
+# else
+#     sudo apt-get update
+#     sudo apt-get install software-properties-common
+#     echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.list
+
+#     curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+#     sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-key A278B781FE4B2BDA
+
+#     sudo apt-get update
+#     sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install oracle-java8-set-default cassandra ntp -y
+
+#     sudo update-rc.d cassandra defaults 95 10
+
+#     sudo systemctl enable cassandra.service
+#     sudo service cassandra start
+# fi
