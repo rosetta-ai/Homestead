@@ -23,7 +23,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install supervisor
 
 # PHP extensions
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install php-amqp php-imagick php-libsodium php-uuid php-xdebug php-zmq
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install php-amqp php-imagick php-uuid php-xdebug php-zmq
 sudo ln -sf /etc/php/7.2/mods-available/xdebug.ini /etc/php/7.2/cli/conf.d/20-xdebug.ini
 
 
